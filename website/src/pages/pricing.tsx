@@ -32,33 +32,32 @@ export default ((props: any) => (
             </Helmet>
             <div className="pricing-page">
                 <ContentSection color="primary" className="hero-section text-center py-5">
-                    <h1>Sourcegraph pricing</h1>
-                    <h3>
-                        Free to start. No commitment.
-                        <br />
-                        Only pay for active users.
-                    </h3>
+                    <h2>Universal Code Search, for less than the cost of one bad line of code.</h2>
+                    <h3>Get started in minutes for free. Scales massively.</h3>
                 </ContentSection>
                 <div className="container-fluid pricing-page__plans">
                     <div className="row pt-6">
                         <div className="col-6 col-md-3 mx-auto mb-4">
                             <PricingPlan
                                 className="pricing__plan"
-                                name="Free"
+                                name="Starter"
                                 description="For individuals and small teams."
-                                price="Free"
+                                price="$0 (0-10 users), $10 (11-25 users)"
                                 priceInterval=""
                                 features={[
                                     { name: 'Code search', id: 'code-search' },
-                                    { name: 'Code navigation (definitions and references)', id: 'code-intelligence' },
-                                    { name: 'Editor and code host integrations', id: 'integrations' },
+                                    { name: 'Code navigation', id: 'code-navigation' },
+                                    { name: 'Code intelligence (25+ languages)', id: 'code-intelligence' },
+                                    { name: 'Code change management campaigns', id: 'campaigns' },
+                                    { name: 'Works with all major code hosts', id: 'integrations' },
+                                    { name: 'Extensive API and integrations', id: 'integrations' },
+                                    { name: 'Single sign-on (SSO)', id: 'admin' },
                                     {
-                                        name: 'Sourcegraph extensions',
+                                        name: 'All deployment options (Docker, Docker Compose, Kubernetes)',
                                         id: 'deployment',
                                     },
-                                    { name: 'Single sign-on (SSO)', id: 'admin' },
+                                    { name: 'Unlimited users of code host integrations', id: 'integrations' },
                                     { name: 'Community support', id: 'support' },
-                                    { name: '10-user limit', id: 'deployment' },
                                 ]}
                                 buttonLabel="Install now"
                                 buttonHref="https://docs.sourcegraph.com#quickstart-guide"
