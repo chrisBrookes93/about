@@ -1,14 +1,9 @@
 .pricing-plan {
-    &__description {
-        // Equal height for all plans' descriptions.
-        min-height: 104px;
-    }
-
     &__price {
         &-amount {
             font-size: 58px;
         }
-        &-caption {
+        &-interval {
         }
     }
     &__button {

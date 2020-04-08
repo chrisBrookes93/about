@@ -4,10 +4,42 @@ import Helmet from 'react-helmet'
 import { ContentSection } from '../components/content/ContentSection'
 import { Jumbotron } from '../components/Jumbotron'
 import Layout from '../components/Layout'
-import { PricingFreeTierPopoverButton } from '../components/PricingFreeTierPopover'
-import { PricingPlan } from '../components/PricingPlan'
-import { PricingTable } from '../components/PricingTable'
+import { PricingPlan, Features } from '../components/pricing/PricingPlan'
 import { GetSourcegraphNowActions } from '../css/components/actions/GetSourcegraphNowActions'
+
+/*
+TODO(sqs): need to communicate:
+
+- all deployment options are allowed
+- unlimited users of code host integrations
+ */
+
+const DESCRIPTION =
+    'Sourcegraph is always free for public and open source code. Start using it for private code with a paid plan.'
+
+/** The Starter feature set. */
+const STARTER_FEATURES: Features = {
+    codeSearch: true,
+    codeIntelligence: true,
+    codeChangeManagementCampaigns: true,
+    codeHostIntegration: true,
+    api: true,
+    singleSignOn: true,
+    userAndAdminRoles: false,
+    multipleCodeHosts: false,
+    repositoryPermissions: false,
+    optimizedRepositoryUpdates: false,
+    privateExtensions: false,
+    deploymentMetricsAndMonitoring: false,
+    backupRestore: false,
+    customBranding: false,
+    guestUsers: false,
+    onlineTraining: false,
+    customContractLegalBillingTerms: false,
+}
+
+/** The Team feature set. */
+const TEAM_FEATURES: Features = { ...STARTER_FEATURES, userAndAdminRoles: true }
 
 export default ((props: any) => (
     <Layout location={props.location}>
@@ -16,131 +48,78 @@ export default ((props: any) => (
                 <title>Sourcegraph - Pricing</title>
                 <meta name="twitter:title" content="Sourcegraph - Pricing" />
                 <meta property="og:title" content="Sourcegraph - Pricing" />
-                <meta
-                    name="twitter:description"
-                    content="Sourcegraph is always free for public and open source code. Start using it for private code with a paid plan."
-                />
-                <meta
-                    property="og:description"
-                    content="Sourcegraph is always free for public and open source code. Start using it for private code with a paid plan."
-                />
-                <meta
-                    name="description"
-                    content="Sourcegraph is always free for public and open source code. Start using it for private code with a paid plan."
-                />
+                <meta name="twitter:description" content={DESCRIPTION} />
+                <meta property="og:description" content={DESCRIPTION} />
+                <meta name="description" content={DESCRIPTION} />
                 <link rel="icon" type="image/png" href="/favicon.png" />
             </Helmet>
             <div className="pricing-page">
                 <ContentSection color="primary" className="hero-section text-center py-5">
-                    <h2>Universal Code Search, for less than the cost of one bad line of code.</h2>
+                    <h2>Universal Code Search</h2>
                     <h3>Get started in minutes for free. Scales massively.</h3>
                 </ContentSection>
                 <div className="container-fluid pricing-page__plans">
                     <div className="row pt-6">
-                        <div className="col-6 col-md-3 mx-auto mb-4">
+                        <div className="col-6 col-md-4 mx-auto mb-4">
                             <PricingPlan
-                                className="pricing__plan"
+                                className="pricing-page__plan"
                                 name="Starter"
-                                description="For individuals and small teams."
-                                price="$0 (0-10 users), $10 (11-25 users)"
-                                priceInterval=""
-                                features={[
-                                    { name: 'Code search', id: 'code-search' },
-                                    { name: 'Code navigation', id: 'code-navigation' },
-                                    { name: 'Code intelligence (25+ languages)', id: 'code-intelligence' },
-                                    { name: 'Code change management campaigns', id: 'campaigns' },
-                                    { name: 'Works with all major code hosts', id: 'integrations' },
-                                    { name: 'Extensive API and integrations', id: 'integrations' },
-                                    { name: 'Single sign-on (SSO)', id: 'admin' },
-                                    {
-                                        name: 'All deployment options (Docker, Docker Compose, Kubernetes)',
-                                        id: 'deployment',
-                                    },
-                                    { name: 'Unlimited users of code host integrations', id: 'integrations' },
-                                    { name: 'Community support', id: 'support' },
-                                ]}
-                                buttonLabel="Install now"
+                                price="$0"
+                                priceInterval="Up to 10 users"
+                                priceCaption={
+                                    <div className="pricing-plan__price d-flex align-items-center justify-content-center">
+                                        <span className="pricing-plan__price-amount mr-2">$10</span>
+                                        <span className="pricing-plan__price-interval">11-25 users (one-time fee)</span>
+                                    </div>
+                                }
+                                priceForCampaigns="20 actions"
+                                features={STARTER_FEATURES}
+                                support="Community support"
+                                buttonLabel="Start now"
                                 buttonHref="https://docs.sourcegraph.com#quickstart-guide"
                             />
                         </div>
-                        <div className="col-6 col-md-3 mx-auto mb-4">
+                        <div className="col-6 col-md-4 mx-auto mb-4">
                             <PricingPlan
-                                className="pricing__plan"
-                                name="Enterprise"
-                                description="Helping developers answer questions and ship faster."
-                                price="$29"
-                                features={[
-                                    { name: 'Code review & pull request integration', id: 'code-review' },
-                                    { name: 'Code alerts', id: 'code-change-management' },
-                                    { name: 'Deployment metrics & monitoring', id: 'deployment' },
-                                    {
-                                        name: 'High-scale/availability cluster deployment option',
-                                        id: 'deployment',
-                                    },
-                                    { name: 'Single sign-on (SSO)', id: 'admin' },
-                                    { name: 'Technical support', id: 'support' },
-                                    { name: 'Cloud-managed option', id: 'deployment' },
-                                ]}
-                                plusEverythingIn="Free"
-                                buttonLabel="Start a trial"
-                                buttonHref="http://about.sourcegraph.com/contact/request-demo/?form_submission_source=pricing-enterprise"
+                                className="pricing-page__plan"
+                                name="Team"
+                                price="$150"
+                                priceInterval="/ month"
+                                priceCaption="Base"
+                                priceForUsers="Base includes 25 users, Add up to 200 users (packs start at $325/month for 25 users, or $375/month if paid monthly)"
+                                priceForCampaigns="Base includes 100 actions, add up to 5k actions (packs start at 100 actions for $800)"
+                                features={TEAM_FEATURES}
+                                support="Email support"
+                                buttonLabel="Buy now"
+                                buttonHref="TODO"
                             />
                         </div>
-                        <div className="col-6 col-md-3 mx-auto mb-4">
+                        <div className="col-6 col-md-4 mx-auto mb-4">
                             <PricingPlan
-                                className="pricing__plan"
-                                name="Enterprise Plus"
-                                description="Accelerating software development across teams."
-                                price="$69"
-                                features={[
-                                    { name: 'Repository access permissions', id: 'admin' },
-                                    { name: 'Custom branding', id: 'admin' },
-                                    { name: 'Sourcegraph extension whitelist', id: 'admin' },
-                                    { name: 'Code reporting & analytics', id: 'admin', future: true },
-                                    { name: 'Audit logs', id: 'admin', future: true },
-                                    { name: 'Priority support', id: 'support' },
-                                ]}
-                                plusEverythingIn="Enterprise"
-                                buttonLabel="Start a trial"
-                                buttonHref="http://about.sourcegraph.com/contact/request-demo/?form_submission_source=pricing-enterprise-plus"
-                            />
-                        </div>
-                        <div className="col-6 col-md-3 mx-auto mb-4">
-                            <PricingPlan
-                                className="pricing__plan"
-                                name="Elite"
-                                description="Transforming the software lifecycle."
-                                price="Elite"
-                                priceInterval=""
-                                features={[
-                                    { name: '24/7 uptime support', id: 'support' },
-                                    {
-                                        name: 'Code change management campaigns',
-                                        id: 'code-change-management',
-                                    },
-                                    { name: 'Private Sourcegraph extension registry', id: 'admin' },
-                                    {
-                                        name: 'License compliance and security analysis',
-                                        id: 'code-change-management',
-                                        future: true,
-                                    },
-                                    {
-                                        name: 'Remote development environment',
-                                        id: 'code-intelligence',
-                                        future: true,
-                                    },
-                                    { name: 'Dedicated support available', id: 'support' },
-                                ]}
-                                plusEverythingIn="Enterprise Plus"
-                                buttonLabel="Contact us"
-                                buttonHref="http://about.sourcegraph.com/contact/request-demo/?form_submission_source=pricing-elite"
+                                className="pricing-page__plan"
+                                name="Business"
+                                price="Contact us"
+                                priceForUsers="Custom"
+                                priceForCampaigns="Custom"
+                                support="SLA, 24/7, and dedicated support available"
+                                features={{
+                                    ...TEAM_FEATURES,
+                                    multipleCodeHosts: true,
+                                    repositoryPermissions: true,
+                                    optimizedRepositoryUpdates: true,
+                                    privateExtensions: true,
+                                    deploymentMetricsAndMonitoring: true,
+                                    backupRestore: true,
+                                    customBranding: true,
+                                    guestUsers: true,
+                                    onlineTraining: true,
+                                    customContractLegalBillingTerms: true,
+                                }}
+                                buttonLabel="Contact sales"
+                                buttonHref="http://about.sourcegraph.com/contact/request-demo/?form_submission_source=pricing-enterprise-plus TODO"
                             />
                         </div>
                     </div>
-                </div>
-                <div className="container-fluid pricing-page__prepaid mb-5">
-                    Prepaid plans and volume discounts are available. <Link to="/contact/sales">Contact us</Link> to
-                    learn more.
                 </div>
             </div>
             <ContentSection color="purple" className="hero-section text-center py-5">
@@ -161,15 +140,11 @@ export default ((props: any) => (
                     Contact sales
                 </Link>
             </ContentSection>
-            <div className="pricing-page__compare container-fluid py-6">
-                <h2 className="text-center display-4 mb-6">Compare plans</h2>
-                <PricingTable />
-            </div>
             <Jumbotron
                 color="purple"
                 className="py-6 mb-0"
                 title="Get Sourcegraph now"
-                description="Start shipping better software faster with the new standard developer platform."
+                description="Start shipping better software faster with Universal Code Search."
                 logomark={false}
             >
                 <GetSourcegraphNowActions />
