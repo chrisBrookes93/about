@@ -1,10 +1,6 @@
 .pricing-plan {
     &__price {
-        &-amount {
-            font-size: 58px;
-        }
-        &-interval {
-        }
+        min-height: 115px;
     }
     &__button {
         font-size: 18px;

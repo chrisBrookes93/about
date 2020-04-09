@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { PricingPlanFeature } from './PricingPlanFeature'
+import { PricingPlanProperty } from './PricingPlanProperty'
 
 /**
  * The features to display for pricing plans.
@@ -54,12 +55,12 @@ const FEATURE_INFO: Record<keyof Features, FeatureInfo> = {
     repositoryPermissions: { label: 'Repository permissions', description: '' },
     optimizedRepositoryUpdates: { label: 'Optimized repository updates', description: '' },
     privateExtensions: { label: 'Private extension registry', description: '' },
-    deploymentMetricsAndMonitoring: { label: 'Deployment metrics and monitoring', description: '' },
+    deploymentMetricsAndMonitoring: { label: 'Deployment metrics/monitoring', description: '' },
     backupRestore: { label: 'Backup and restore', description: '' },
     customBranding: { label: 'Custom branding', description: '' },
     guestUsers: { label: 'Guest users', description: '' },
-    onlineTraining: { label: 'Online training sessions tailed to your org', description: '' },
-    customContractLegalBillingTerms: { label: 'Custom contract/legal/billing terms', description: '' },
+    onlineTraining: { label: 'Live online training sessions', description: '' },
+    customContractLegalBillingTerms: { label: 'Custom contracts and billing', description: '' },
 }
 
 const FEATURE_ORDER: (keyof Features)[] = [
@@ -86,13 +87,9 @@ interface Props {
     className?: string
 
     name: string
+    planProperties: React.ReactFragment
+    price: React.ReactFragment
     features: Features
-    price: string | React.ReactFragment
-    priceInterval?: string | React.ReactFragment
-    priceCaption?: string | React.ReactFragment
-    priceForUsers?: string | React.ReactFragment
-    priceForCampaigns?: string | React.ReactFragment
-    support: string
 
     buttonLabel: string
     buttonOnClick?: () => void
@@ -107,11 +104,7 @@ export const PricingPlan: React.FunctionComponent<Props> = ({
 
     name,
     price,
-    priceInterval,
-    priceCaption,
-    priceForUsers,
-    priceForCampaigns,
-    support,
+    planProperties,
     features,
 
     buttonLabel,
@@ -120,15 +113,9 @@ export const PricingPlan: React.FunctionComponent<Props> = ({
 }) => (
     <div className={`pricing-plan card border-0 ${className}`}>
         <h2 className="card-title border-bottom py-2 text-center">{name}</h2>
-        <div className="card-body pt-2 d-flex flex-column align-items-center flex-grow-0">
-            <div className="pricing-plan__price d-flex align-items-center justify-content-center">
-                <span className="pricing-plan__price-amount mr-2">{price}</span>
-                {priceInterval && <span className="pricing-plan__price-interval">{priceInterval}</span>}
-            </div>
-            {priceCaption && <div className="pricing-plan__price-caption">{priceCaption}</div>}
-            <div>Users: {priceForUsers}</div>
-            <div>Campaign actions: {priceForCampaigns}</div>
-            <div>Support: {support}</div>
+        <div className="card-body pt-2 d-flex flex-column align-items-center flex-grow-0 text-center">
+            <div className="mb-3 pricing-plan__price">{price}</div>
+            {planProperties}
         </div>
         <ol className="list-group list-group-flush py-3">
             {FEATURE_ORDER.map(feature => (
