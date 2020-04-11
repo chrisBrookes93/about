@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { PricingPlanFeature } from './PricingPlanFeature'
-import { PricingPlanProperty } from './PricingPlanProperty'
 
 /**
  * The features to display for pricing plans.
