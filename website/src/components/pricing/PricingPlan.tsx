@@ -7,10 +7,11 @@ import { PricingPlanFeature } from './PricingPlanFeature'
 export interface Features {
     codeSearch: true
     codeIntelligence: true
-    codeChangeManagementCampaigns: true
+    codeChangeManagementCampaigns: boolean
     codeHostIntegration: true
     api: true
     singleSignOn: true
+    selfHosted: true
 
     userAndAdminRoles: boolean
 
@@ -47,8 +48,12 @@ const FEATURE_INFO: Record<keyof Features, FeatureInfo> = {
         description:
             'Works with GitHub, GitLab, Bitbucket Server/Cloud, and other popular code hosts (or manually add repositories from any VCS)',
     },
-    singleSignOn: { label: 'SSO/SAML', description: '' },
     api: { label: 'Comprehensive API', description: '' },
+    singleSignOn: { label: 'SSO/SAML', description: '' },
+    selfHosted: {
+        label: 'Self-hosted deployment',
+        description: 'Deploy with Docker, Docker Compose, or Kubernetes on your own infrastructure',
+    },
     userAndAdminRoles: { label: 'User and administrator roles', description: '' },
     multipleCodeHosts: { label: 'Multiple code hosts', description: '' },
     repositoryPermissions: { label: 'Repository permissions', description: '' },
@@ -65,11 +70,12 @@ const FEATURE_INFO: Record<keyof Features, FeatureInfo> = {
 const FEATURE_ORDER: (keyof Features)[] = [
     'codeSearch',
     'codeIntelligence',
-    'codeChangeManagementCampaigns',
     'codeHostIntegration',
     'api',
     'singleSignOn',
+    'selfHosted',
     'userAndAdminRoles',
+    'codeChangeManagementCampaigns',
     'multipleCodeHosts',
     'repositoryPermissions',
     'optimizedRepositoryUpdates',
@@ -91,6 +97,7 @@ interface Props {
     features: Features
 
     buttonLabel: string
+    buttonClassName: string
     buttonOnClick?: () => void
     buttonHref: string
 }
@@ -107,32 +114,41 @@ export const PricingPlan: React.FunctionComponent<Props> = ({
     features,
 
     buttonLabel,
+    buttonClassName,
     buttonOnClick,
     buttonHref,
-}) => (
-    <div className={`pricing-plan card border-0 ${className}`}>
-        <h2 className="card-title border-bottom py-2 text-center">{name}</h2>
-        <div className="card-body pt-2 d-flex flex-column align-items-center flex-grow-0 text-center">
-            <div className="mb-3 pricing-plan__price">{price}</div>
-            {planProperties}
-        </div>
-        <ol className="list-group list-group-flush py-3">
-            {FEATURE_ORDER.map(feature => (
-                <PricingPlanFeature
-                    key={feature}
-                    info={FEATURE_INFO[feature]}
-                    value={features[feature]}
-                    tag="li"
-                    className="list-group-item bg-transparent border-0 px-0"
-                />
-            ))}
-        </ol>
+}) => {
+    const button = (
         <a
-            className="pricing-plan__button btn btn-primary justify-content-center text-center d-inline-flex"
+            className={`pricing-plan__button btn ${buttonClassName} w-100 justify-content-center text-center d-inline-flex`}
             href={buttonHref}
             onClick={buttonOnClick}
         >
             {buttonLabel}
         </a>
-    </div>
-)
+    )
+
+    return (
+        <div className={`pricing-plan card ${className}`}>
+            <h2 className="card-title mt-3 mb-1 text-center pricing-plan__title">{name}</h2>
+            <div className="card-body">{button}</div>
+            <div className="card-body pt-1 text-center d-flex flex-column align-items-center">
+                <div className="mb-4 pricing-plan__price text-muted">{price}</div>
+                {planProperties}
+            </div>
+            <hr className="mx-3 px-1" />
+            <ol className="list-group list-group-flush py-3">
+                {FEATURE_ORDER.map(feature => (
+                    <PricingPlanFeature
+                        key={feature}
+                        info={FEATURE_INFO[feature]}
+                        value={features[feature]}
+                        tag="li"
+                        className="list-group-item bg-transparent border-0"
+                    />
+                ))}
+            </ol>
+            <div className="card-body">{button}</div>
+        </div>
+    )
+}

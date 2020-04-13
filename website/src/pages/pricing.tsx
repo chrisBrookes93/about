@@ -2,10 +2,8 @@ import { Link } from 'gatsby'
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import { ContentSection } from '../components/content/ContentSection'
-import { Jumbotron } from '../components/Jumbotron'
 import Layout from '../components/Layout'
 import { PricingPlan, Features } from '../components/pricing/PricingPlan'
-import { GetSourcegraphNowActions } from '../css/components/actions/GetSourcegraphNowActions'
 import { PricingPlanProperty } from '../components/pricing/PricingPlanProperty'
 
 /*
@@ -22,10 +20,11 @@ const DESCRIPTION =
 const STARTER_FEATURES: Features = {
     codeSearch: true,
     codeIntelligence: true,
-    codeChangeManagementCampaigns: true,
+    codeChangeManagementCampaigns: false,
     codeHostIntegration: true,
     api: true,
     singleSignOn: true,
+    selfHosted: true,
     userAndAdminRoles: false,
     multipleCodeHosts: false,
     repositoryPermissions: false,
@@ -56,41 +55,24 @@ export default ((props: any) => (
             </Helmet>
             <div className="pricing-page">
                 <ContentSection color="primary" className="hero-section text-center py-5">
-                    <h2>Universal Code Search</h2>
-                    <h3>Insert text here</h3>
+                    <h2>Universal Code Search scales with your team</h2>
                 </ContentSection>
                 <div className="container-fluid pricing-page__plans">
-                    <div className="row pt-6">
+                    <div className="row pt-3">
                         <div className="col-6 col-md-4 mx-auto mb-4">
                             <PricingPlan
                                 className="pricing-page__plan"
-                                name="Starter"
-                                price={
-                                    <div className="d-flex w-100 text-center">
-                                        <div className="flex-1 mr-3">
-                                            <div className="small">First 10 users</div>
-                                            <div className="h1 mb-0">$0</div>
-                                        </div>
-                                        <div className="flex-1 ml-3">
-                                            <div className="small">Up to 25 users</div>
-                                            <div className="h1 mb-0">$10</div>{' '}
-                                            <span className="small">
-                                                One-time payment,
-                                                <br />
-                                                donated to charity
-                                            </span>
-                                        </div>
-                                    </div>
-                                }
+                                name="Free"
+                                price={<div className="text-center">$0/mo</div>}
                                 planProperties={
                                     <>
-                                        <PricingPlanProperty>Up to 25 users</PricingPlanProperty>
-                                        <PricingPlanProperty>Includes 50 campaign actions</PricingPlanProperty>
+                                        <PricingPlanProperty>Up to 10 users</PricingPlanProperty>
                                         <PricingPlanProperty>Community support</PricingPlanProperty>
                                     </>
                                 }
                                 features={STARTER_FEATURES}
-                                buttonLabel="Start now"
+                                buttonLabel="Deploy"
+                                buttonClassName="btn-outline-primary"
                                 buttonHref="https://docs.sourcegraph.com#quickstart-guide"
                             />
                         </div>
@@ -98,26 +80,18 @@ export default ((props: any) => (
                             <PricingPlan
                                 className="pricing-page__plan"
                                 name="Team"
-                                price={
-                                    <div className="text-center">
-                                        <div className="small">Starts at</div>
-                                        <div className="h1 mb-0">$150/month</div>
-                                        <div className="small">Paid annually</div>
-                                    </div>
-                                }
+                                price={<div className="text-center">Starts at $150/mo</div>}
                                 planProperties={
                                     <>
-                                        <PricingPlanProperty description="Add up to 200 users (packs start at $325/month for 25 users, or $375/month if paid monthly)">
-                                            Includes 25 users
-                                        </PricingPlanProperty>
-                                        <PricingPlanProperty description="Add up to 5,000 actions (packs start at 100 actions for $800)">
-                                            Includes 200 campaign actions
+                                        <PricingPlanProperty description="Add up to 200 users ($13/mo for each additional user)">
+                                            25 users included
                                         </PricingPlanProperty>
                                         <PricingPlanProperty>Email support</PricingPlanProperty>
                                     </>
                                 }
                                 features={TEAM_FEATURES}
                                 buttonLabel="Buy now"
+                                buttonClassName="btn-success"
                                 buttonHref="TODO"
                             />
                         </div>
@@ -125,21 +99,16 @@ export default ((props: any) => (
                             <PricingPlan
                                 className="pricing-page__plan"
                                 name="Business"
-                                price={
-                                    <div className="text-center">
-                                        <div className="small">Custom pricing</div>
-                                        <div className="h1 mb-0">Contact us</div>
-                                    </div>
-                                }
+                                price={<div className="text-center">Custom pricing</div>}
                                 planProperties={
                                     <>
                                         <PricingPlanProperty>Custom user pricing</PricingPlanProperty>
-                                        <PricingPlanProperty>Custom campaign pricing</PricingPlanProperty>
                                         <PricingPlanProperty>SLA, 24/7, and dedicated support</PricingPlanProperty>
                                     </>
                                 }
                                 features={{
                                     ...TEAM_FEATURES,
+                                    codeChangeManagementCampaigns: true,
                                     multipleCodeHosts: true,
                                     repositoryPermissions: true,
                                     optimizedRepositoryUpdates: true,
@@ -151,7 +120,8 @@ export default ((props: any) => (
                                     onlineTraining: true,
                                     customContractLegalBillingTerms: true,
                                 }}
-                                buttonLabel="Contact sales"
+                                buttonLabel="Get a demo"
+                                buttonClassName="btn-outline-primary"
                                 buttonHref="http://about.sourcegraph.com/contact/request-demo/?form_submission_source=pricing-enterprise-plus TODO"
                             />
                         </div>
