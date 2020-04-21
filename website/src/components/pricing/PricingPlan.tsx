@@ -105,8 +105,7 @@ const FEATURE_INFO: Record<keyof Features, FeatureInfo> = {
     },
     onlineTraining: {
         label: 'Live training sessions',
-        description:
-            'Customized training or "brown-bag lunch" online sessions for your organization with our Customer Engineering team',
+        description: 'Personalized online training sessions for your organization with our Customer Engineering team',
     },
     customContractLegalBillingTerms: {
         label: 'Custom contracts/billing',
