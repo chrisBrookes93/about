@@ -33,14 +33,13 @@ export const PricingPlanFeature: React.FunctionComponent<Props> = ({
                 />{' '}
                 {label}
             </div>
-            <OverlayTrigger
-                placement="auto"
-                overlay={description ? <Tooltip id="tooltip">{description}</Tooltip> : <span />}
-            >
-                <span className="ml-2 pricing-plan-feature__help">
-                    <QuestionMarkCircleOutlineIcon />
-                </span>
-            </OverlayTrigger>
+            {description && (
+                <OverlayTrigger placement="auto" flip={true} overlay={<Tooltip id="tooltip">{description}</Tooltip>}>
+                    <span className="ml-2 pricing-plan-feature__help">
+                        <QuestionMarkCircleOutlineIcon />
+                    </span>
+                </OverlayTrigger>
+            )}
         </Tag>
     )
 }

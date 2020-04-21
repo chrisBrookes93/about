@@ -66,8 +66,8 @@ export default ((props: any) => (
                                 price={<div className="text-center">$0/mo</div>}
                                 planProperties={
                                     <>
-                                        <PricingPlanProperty>Up to 10 users</PricingPlanProperty>
-                                        <PricingPlanProperty>Community support</PricingPlanProperty>
+                                        <PricingPlanProperty description={<br />}>Up to 10 users</PricingPlanProperty>
+                                        <PricingPlanProperty className="mt-3">Community support</PricingPlanProperty>
                                     </>
                                 }
                                 features={STARTER_FEATURES}
@@ -83,10 +83,10 @@ export default ((props: any) => (
                                 price={<div className="text-center">Starts at $150/mo</div>}
                                 planProperties={
                                     <>
-                                        <PricingPlanProperty description="Add up to 200 users ($13/mo for each additional user)">
+                                        <PricingPlanProperty description={<>Add up to 200 users at $13/mo each</>}>
                                             25 users included
                                         </PricingPlanProperty>
-                                        <PricingPlanProperty>Email support</PricingPlanProperty>
+                                        <PricingPlanProperty className="mt-2 pt-1">Email support</PricingPlanProperty>
                                     </>
                                 }
                                 features={TEAM_FEATURES}
@@ -98,12 +98,16 @@ export default ((props: any) => (
                         <div className="col-6 col-md-4 mx-auto mb-4">
                             <PricingPlan
                                 className="pricing-page__plan"
-                                name="Business"
+                                name="Enterprise"
                                 price={<div className="text-center">Custom pricing</div>}
                                 planProperties={
                                     <>
-                                        <PricingPlanProperty>Custom user pricing</PricingPlanProperty>
-                                        <PricingPlanProperty>SLA, 24/7, and dedicated support</PricingPlanProperty>
+                                        <PricingPlanProperty description={<>Scales to 100,000+ users</>}>
+                                            Custom user pricing
+                                        </PricingPlanProperty>
+                                        <PricingPlanProperty className="mt-3">
+                                            SLA, 24/7, and dedicated support
+                                        </PricingPlanProperty>
                                     </>
                                 }
                                 features={{
