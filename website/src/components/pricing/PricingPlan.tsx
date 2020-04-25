@@ -44,7 +44,7 @@ const FEATURE_INFO: Record<keyof Features, FeatureInfo> = {
         description: 'Code navigation for 30+ languages, with hovers, definitions, and references across repositories',
     },
     codeChangeManagementCampaigns: {
-        label: 'Campaigns',
+        label: 'Campaigns (beta)',
         description:
             'Code change management campaigns help coordinate large-scale changes across many repositories. Campaigns is in beta. During beta, it is available in all plans at no extra charge. After the beta, campaigns will be a paid add-on for all plans.',
     },
