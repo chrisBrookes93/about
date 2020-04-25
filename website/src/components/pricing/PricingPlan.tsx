@@ -45,7 +45,8 @@ const FEATURE_INFO: Record<keyof Features, FeatureInfo> = {
     },
     codeChangeManagementCampaigns: {
         label: 'Campaigns',
-        description: 'Code change management campaigns help coordinate large-scale changes across many repositories',
+        description:
+            'Code change management campaigns help coordinate large-scale changes across many repositories. Campaigns is in beta. During beta, it is available in all plans at no extra charge. After the beta, campaigns will be a paid add-on for all plans.',
     },
     codeHostIntegration: {
         label: 'Code host integrations',
@@ -179,7 +180,7 @@ export const PricingPlan: React.FunctionComponent<Props> = ({
             <h2 className="card-title mt-3 mb-1 text-center pricing-plan__title">{name}</h2>
             <div className="card-body">{button}</div>
             <div className="card-body pt-1 text-center d-flex flex-column align-items-center">
-                <div className="mb-5 pb-2 pricing-plan__price text-muted">{price}</div>
+                <div className="mb-2 pb-2 pricing-plan__price text-muted">{price}</div>
                 {planProperties}
             </div>
             <hr className="mx-3 px-1" />

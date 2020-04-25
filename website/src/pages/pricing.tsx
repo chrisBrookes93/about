@@ -66,7 +66,16 @@ export default ((props: any) => (
                                 price={<div className="text-center">$0/mo</div>}
                                 planProperties={
                                     <>
-                                        <PricingPlanProperty description={<br />}>Up to 10 users</PricingPlanProperty>
+                                        <PricingPlanProperty
+                                            description={
+                                                <>
+                                                    <br />
+                                                    <br />
+                                                </>
+                                            }
+                                        >
+                                            Up to 10 users
+                                        </PricingPlanProperty>
                                         <PricingPlanProperty className="mt-3">Community support</PricingPlanProperty>
                                     </>
                                 }
@@ -83,7 +92,13 @@ export default ((props: any) => (
                                 price={<div className="text-center">Starts at $150/mo</div>}
                                 planProperties={
                                     <>
-                                        <PricingPlanProperty description={<>Add up to 200 users at $13/mo each</>}>
+                                        <PricingPlanProperty
+                                            description={
+                                                <>
+                                                    Add up to 200 users. Packs start at $325/mo for 25 additional users.
+                                                </>
+                                            }
+                                        >
                                             25 users included
                                         </PricingPlanProperty>
                                         <PricingPlanProperty className="mt-2 pt-1">Email support</PricingPlanProperty>
@@ -102,7 +117,15 @@ export default ((props: any) => (
                                 price={<div className="text-center">Custom pricing</div>}
                                 planProperties={
                                     <>
-                                        <PricingPlanProperty description={<>Scales to 100,000+ users</>}>
+                                        <PricingPlanProperty
+                                            description={
+                                                <>
+                                                    Scales to 100,000+ users
+                                                    <br />
+                                                    <br />
+                                                </>
+                                            }
+                                        >
                                             Custom user pricing
                                         </PricingPlanProperty>
                                         <PricingPlanProperty className="mt-3">
